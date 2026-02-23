@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suman Kumar Kanti - IT Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0A0E27;
+            --accent: #00D9FF;
+            --accent-dim: #0088AA;
+            --secondary: #FF3366;
+            --text-light: #E8ECF1;
+            --text-dim: #9BA5B4;
+            --card-bg: #151930;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--primary);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .name {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .contact-item::before {
+            content: '▸';
+            color: var(--accent);
+        }
+
+        /* Navigation */
+        .nav-section {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .nav-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-dim);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.3;
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Section styling */
+        section {
+            margin: 3rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            animation: expandWidth 0.6s ease-out;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Objective */
+        .objective-text {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .objective-text:hover {
+            transform: translateX(10px);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border: 1px solid var(--accent-dim);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .skill-card li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 0.7rem;
+        }
+
+        /* Experience Timeline */
+        .experience-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--secondary);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.2);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .job-period {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .company {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .experience-item li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .experience-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Education */
+        .education-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--accent-dim);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        }
+
+        .degree {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .institution {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-details {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Certifications */
+        .cert-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .cert-item {
+            background: var(--card-bg);
+            padding: 1.2rem;
+            border-left: 3px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.2);
+        }
+
+        /* Personal Info */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--accent-dim);
+        }
+
+        .personal-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .personal-label {
+            color: var(--accent);
+            font-weight: 600;
+            min-width: 140px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--accent-dim);
+            color: var(--text-dim);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="name">Suman Kumar Kanti</h1>
+            <p class="tagline">Dynamic IT Engineer | System Configuration & Network Specialist</p>
+            <div class="contact-info">
+                <span class="contact-item">9016051216</span>
+                <span class="contact-item">sumankantir@gmail.com</span>
+                <span class="contact-item">Silvassa 396230</span>
+            </div>
+        </header>
+
+        <nav class="nav-section">
+            <button class="nav-btn" onclick="scrollToSection('objective')">Objective</button>
+            <button class="nav-btn" onclick="scrollToSection('skills')">Skills</button>
+            <button class="nav-btn" onclick="scrollToSection('experience')">Experience</button>
+            <button class="nav-btn" onclick="scrollToSection('education')">Education</button>
+            <button class="nav-btn" onclick="scrollToSection('certifications')">Certifications</button>
+        </nav>
+
+        <section id="objective">
+            <h2 class="section-title">Career Objective</h2>
+            <div class="objective-text">
+                Dynamic IT Engineer with a proven track record at Balaji Computer, excelling in system configuration and technical support. Expert in network diagnostics and hardware installation, I enhance client satisfaction through effective troubleshooting and proactive maintenance. Passionate about leveraging programming expertise to drive efficiency and deliver exceptional service.
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>System & Network</h3>
+                    <ul>
+                        <li>System configuration and upkeep</li>
+                        <li>Network diagnostics</li>
+                        <li>Hardware installation and preparation</li>
+                        <li>Software deployment and support</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Technical Support</h3>
+                    <ul>
+                        <li>Technical support</li>
+                        <li>Programming expertise</li>
+                        <li>MS Office proficiency</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">IT Engineer</div>
+                        <div class="company">Balaji Computer, Silvassa</div>
+                    </div>
+                    <div class="job-period">June 2025 - Current</div>
+                </div>
+                <ul>
+                    <li>Installed and configured CCTV systems across various client sites to enhance surveillance capabilities</li>
+                    <li>Conducted regular maintenance on surveillance equipment, ensuring optimal functionality</li>
+                    <li>Responded to customer inquiries, improving overall service satisfaction</li>
+                    <li>Executed routine updates for existing software systems to maintain efficiency</li>
+                    <li>Provided technical support for LANs, telephone systems, voice mail, email, and messaging applications, and intranet systems</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">IT Intern</div>
+                        <div class="company">Over Tech Technology, Silvassa, India</div>
+                    </div>
+                    <div class="job-period">April 2024 - January 2025</div>
+                </div>
+                <ul>
+                    <li>Troubleshoot software and hardware issues for internal users effectively</li>
+                    <li>Installed, configured, and tested routers, firewalls, and servers to ensure optimal performance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="education-card">
+                <div class="degree">Bachelor of Science - Information Technology</div>
+                <div class="institution">Smt. Devkiba Mohansinhji Chauhan College of Commerce, Silvassa</div>
+                <div class="education-details">
+                    <div>Affiliated to University of Mumbai</div>
+                    <div>Relevant Coursework: Computer Systems and Networks, Web Development, Database Management, Cybersecurity</div>
+                    <div>GPA: 6.9</div>
+                </div>
+            </div>
+
+            <div class="education-card">
+                <div class="degree">12TH & 10TH</div>
+                <div class="institution">Commerce, Govt. SSC & HSC Rakholi (E.M), Rakholi, Silvassa</div>
+                <div class="education-details">DNH & DD May 2022</div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2 class="section-title">Certifications</h2>
+            <ul class="cert-list">
+                <li class="cert-item">SQL, intellipaat, 31679-913167-343644</li>
+                <li class="cert-item">C++, Aptech Computer Education, Silvassa, Gujarat</li>
+                <li class="cert-item">AI & Data Science, IIT Indore, learning</li>
+            </ul>
+        </section>
+
+        <section id="personal">
+            <h2 class="section-title">Personal Information</h2>
+            <div class="personal-grid">
+                <div class="personal-item">
+                    <span class="personal-label">Father's Name:</span>
+                    <span>Satyadev Kanti</span>
+                </div>
+                <div class="personal-item">
+                    <span class="personal-label">Date of Birth:</span>
+                    <span>08/18/03</span>
+                </div>
+                <div class="personal-item">
+                    <span class="personal-label">Gender:</span>
+                    <span>Male</span>
+                </div>
+                <div class="personal-item">
+                    <span class="personal-label">Nationality:</span>
+                    <span>Indian</span>
+                </div>
+                <div class="personal-item">
+                    <span class="personal-label">Marital Status:</span>
+                    <span>Unmarried</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>DISCLAIMER:</strong> I hereby declare that the above information given by me is true to best of my Knowledge.</p>
+            <p style="margin-top: 1rem;">&copy; 2026 Suman Kumar Kanti. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll to section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Add stagger animation to elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
